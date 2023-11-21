@@ -71,12 +71,19 @@ public class TransactionController {
     @Autowired
     private TransactionHistory transactionHistory;
 
-    @GetMapping("/transactionHistory/{cif}")
+   /* @GetMapping("/transactionHistory/{cif}")
     public ResponseEntity<List<TransactionHistory.TransactionDetails>> getTransactionHistory(@PathVariable int cif) {
         List<TransactionHistory.TransactionDetails> transactionDetails = transactionHistory.getTransactionHistory(cif);
         return new ResponseEntity<>(transactionDetails, HttpStatus.OK);
     }
-
-
+*/
+    @GetMapping("/Alltransaction")
+    public List<Transaction> getAllTransaction(){
+     return transactionHistory.getAllTransactions();
+    }
+    @GetMapping("/transactionHistory")
+    public List<Transaction> getTransactionHistory(){
+        return transactionHistory.getRecentTransactions();
+    }
 }
 
