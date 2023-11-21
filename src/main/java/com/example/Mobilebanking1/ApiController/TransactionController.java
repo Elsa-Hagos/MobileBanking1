@@ -31,9 +31,11 @@ public class TransactionController {
         return new ResponseEntity<>(transaction, HttpStatus.CREATED);
     }
     @PostMapping("/transfer")
-    public ResponseEntity<Transaction> transferMoney(@RequestBody TransferRequest request) {
-        Transaction transaction = transfer.transferMoney(request.getFromUserId(), request.getToUserId(), request.getAmount());
-        return new ResponseEntity<>(transaction, HttpStatus.OK);
+    public String transferMoney(@RequestParam long fromAccountNumber,
+                                                     @RequestParam long toAccountNumber,
+                                                     @RequestParam double amount) {
+
+        return transfer.transferMoney(fromAccountNumber,toAccountNumber,amount);
     }
 
     // Assuming you have a TransferRequest class like this:

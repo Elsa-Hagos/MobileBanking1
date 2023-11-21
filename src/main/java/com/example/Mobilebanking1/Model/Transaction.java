@@ -20,8 +20,55 @@ public class Transaction {
         @ManyToOne
         @JoinColumn(name = "creditedAccountID")
         private Account creditedAccount;
+        private long debitAccount;
+        private long creditAccount;
+        private double amount;
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public Transaction setAmount(double amount) {
+        this.amount = amount;
+        return this;
+    }
+
+    public long getDebitAccount() {
+        return debitAccount;
+    }
+
+    public Transaction setDebitAccount(long debitAccount) {
+        this.debitAccount = debitAccount;
+        return this;
+    }
+
+    public long getCreditAccount() {
+        return creditAccount;
+    }
+
+    public Transaction setCreditAccount(long ceditAccount) {
+        this.creditAccount = ceditAccount;
+        return this;
+    }
+
         private Date transactionDate;
-        @ManyToOne(fetch = FetchType.LAZY)
+        private long acctNO;
+
+    public Transaction setTransactionID(int transactionID) {
+        this.transactionID = transactionID;
+        return this;
+    }
+
+    public long getAcctNO() {
+        return acctNO;
+    }
+
+    public Transaction setAcctNO(long acctNO) {
+        this.acctNO = acctNO;
+        return this;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "userID")
         private MobileBankingUser mobileBankingUser;
         @ManyToOne

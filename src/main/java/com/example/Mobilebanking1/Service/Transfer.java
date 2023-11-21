@@ -5,6 +5,8 @@ import com.example.Mobilebanking1.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class Transfer {
 
@@ -18,7 +20,7 @@ public class Transfer {
         @Autowired
         private MobileBankingUserRepo mobileBankingUserRepo;
 
-        public Transaction transferMoney(int fromUserId, int toUserId, double amount) {
+       /* public Transaction transferMoney(int fromUserId, int toUserId, double amount) {
             // Find the accounts of the users
             MobileBankingUser fromUser = mobileBankingUserRepo.findById(fromUserId).orElseThrow(() -> new RuntimeException("User not found"));
             MobileBankingUser toUser = mobileBankingUserRepo.findById(toUserId).orElseThrow(() -> new RuntimeException("User not found"));
@@ -51,7 +53,34 @@ public class Transfer {
             transactionRepo.save(transaction);
 
             return transaction;
-        }
+        }*/
+
+       public String transferMoney(long fromAccountNumber, long toAccountNumber, double amount) {
+           Account fromAccount = accountRepo.getByAcctNO(fromAccountNumber);
+           Account toAccount = accountRepo.getByAcctNO(toAccountNumber);
+
+           if (fromAccount != null && toAccount != null && fromAccount.getBalance()>=amount) {
+               fromAccount.setBalance(fromAccount.getBalance() - amount);
+               toAccount.setBalance(toAccount.getBalance() + amount);
+
+               // Update account balances in the database
+               accountRepo.save(fromAccount);
+               accountRepo.save(toAccount);
+
+               // Record the fund transfer
+               Transaction fundTransfer = new Transaction();
+               fundTransfer.setDebitAccount(fromAccountNumber);
+               fundTransfer.setCreditAccount(toAccountNumber);
+               fundTransfer.setAmount(amount);
+               //fundTransfer.setTransactionDate(LocalDateTime.now());
+               transactionRepo.save(fundTransfer);
+
+               return "Funds transferred successfully";
+           }
+           else{
+               return "Fund transfer UnSuccesfull";
+           }
+       }
     }
 
 
