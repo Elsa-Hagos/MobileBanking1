@@ -5,6 +5,7 @@ import com.example.Mobilebanking1.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -72,7 +73,7 @@ public class Transfer {
                fundTransfer.setDebitAccount(fromAccountNumber);
                fundTransfer.setCreditAccount(toAccountNumber);
                fundTransfer.setAmount(amount);
-               //fundTransfer.setTransactionDate(LocalDateTime.now());
+               fundTransfer.setTransactionDate(LocalDate.now());
                transactionRepo.save(fundTransfer);
 
                return "Funds transferred successfully";

@@ -3,6 +3,8 @@ package com.example.Mobilebanking1.Model;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
+
 @Entity
 public class Transaction {
 
@@ -23,6 +25,7 @@ public class Transaction {
         private long debitAccount;
         private long creditAccount;
         private double amount;
+
 
     public double getAmount() {
         return amount;
@@ -51,7 +54,7 @@ public class Transaction {
         return this;
     }
 
-        private Date transactionDate;
+        private LocalDate transactionDate;
         private long acctNO;
 
     public Transaction setTransactionID(int transactionID) {
@@ -111,11 +114,11 @@ public class Transaction {
             this.creditedAccount = creditedAccount;
         }
 
-        public Date getTransactionDate() {
+        public LocalDate getTransactionDate() {
             return transactionDate;
         }
 
-        public void setTransactionDate(Date transactionDate) {
+        public void setTransactionDate(LocalDate transactionDate) {
             this.transactionDate = transactionDate;
         }
 

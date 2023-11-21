@@ -9,6 +9,7 @@ import java.util.List;
 public interface TransactionRepo extends JpaRepository<Transaction, Integer> {
 
     List<Transaction> findByCustomer(Customer customer);
+    List<Transaction> findTop5ByOrderByTransactionDateDesc();
 }
 
 

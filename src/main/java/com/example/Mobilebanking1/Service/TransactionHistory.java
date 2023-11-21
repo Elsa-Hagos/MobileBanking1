@@ -18,7 +18,7 @@ public class TransactionHistory {
         @Autowired
         private TransactionRepo transactionRepo;
 
-        public List<TransactionDetails> getTransactionHistory(int cif) {
+        /*public List<TransactionDetails> getTransactionHistory(int cif) {
             // Find the customer
             Customer customer = customerRepo.findById(cif).orElseThrow(() -> new RuntimeException("Customer not found"));
 
@@ -89,7 +89,13 @@ public class TransactionHistory {
             public void setTransaction(Transaction transaction) {
                 this.transaction = transaction;
             }
+        }*/
+        public List<Transaction> getRecentTransactions() {
+            return transactionRepo.findTop5ByOrderByTransactionDateDesc();
         }
+        public List<Transaction> getAllTransactions(){
+            return transactionRepo.findAll();
+    }
     }
 
 
