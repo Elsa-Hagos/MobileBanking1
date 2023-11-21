@@ -22,6 +22,26 @@ public class MobileBankingUser {
     @ManyToOne
     @JoinColumn(name = "acctID")
     private Account account;
+    private long acctNO;
+
+    public List<Transaction> getTransaction() {
+        return transaction;
+    }
+
+    public MobileBankingUser setTransaction(List<Transaction> transaction) {
+        this.transaction = transaction;
+        return this;
+    }
+
+    public long getAcctNO() {
+        return acctNO;
+    }
+
+    public MobileBankingUser setAcctNO(long acctNO) {
+        this.acctNO = acctNO;
+        return this;
+    }
+
     private String username;
     private String pin;
 
